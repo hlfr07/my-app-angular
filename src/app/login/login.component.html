@@ -1,0 +1,117 @@
+<style>
+  .login_img_section {
+    background: linear-gradient(rgba(2, 2, 2, .7), rgba(0, 0, 0, .7)), url(https://images.unsplash.com/photo-1650825556125-060e52d40bd0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80) center center;
+  }
+
+  .form-container {
+    background-color: #FFFFFF;
+    border: 2px solid #6B7280;
+    border-radius: 20px;
+    padding: 80px;
+    margin: 0 20px;
+  }
+</style>
+<div class="h-screen flex">
+  <div class="hidden lg:flex w-full lg:w-1/2 login_img_section justify-around items-center">
+    <div class="bg-black opacity-20 inset-0 z-0"></div>
+    <div class="w-full mx-auto px-20 flex-col items-center space-y-6">
+      <h1 class="text-white font-bold text-4xl font-sans">Simple App</h1>
+      <p class="text-white mt-1">The simplest app to use</p>
+      <div class="flex justify-center lg:justify-start mt-6">
+        <a href="#"
+          class="hover:bg-indigo-700 hover:text-white hover:-translate-y-1 transition-all duration-500 bg-white text-indigo-800 mt-4 px-4 py-2 rounded-2xl font-bold mb-2">Get
+          Started</a>
+      </div>
+    </div>
+  </div>
+  <div class="flex w-full lg:w-1/2 justify-center items-center space-y-8">
+    <div class="form-container">
+      <div class="rounded-t mb-0 px-6 py-6">
+        <div class="text-center mb-3">
+          <h6 class="text-blueGray-500 text-sm font-bold">
+            Sign in with
+          </h6>
+        </div>
+        <div class="btn-wrapper text-center">
+          <button
+            class="bg-white active:bg-blueGray-50 text-blueGray-700 px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
+            type="button">
+            <img alt="..." class="w-5 mr-1"
+              src="https://demos.creative-tim.com/notus-js/assets/img/github.svg">Github</button>
+          <button
+            class="bg-white active:bg-blueGray-50 text-blueGray-700 px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
+            type="button">
+            <img alt="..." class="w-5 mr-1" src="https://demos.creative-tim.com/notus-js/assets/img/google.svg">Google
+          </button>
+
+        </div>
+        <hr class="mt-6 border-b-1 border-blueGray-300">
+      </div>
+      <form [formGroup]="formulario" (ngSubmit)="onSubmitlogin()">
+        <div class="flex flex-col mb-8">
+          <div class="flex items-center border-2 py-2 px-3 rounded-2xl">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+            </svg>
+            <input name="usuario" class="pl-2 w-full outline-none border-none" type="text" placeholder="Usuario"
+              formControlName="usuario">
+          </div>
+          <span class="text-red-500 ml-auto">{{ getErrorMessage('usuario') }}</span>
+        </div>
+        <div class="flex flex-col mb-12">
+          <div class="flex items-center border-2 py-2 px-3 rounded-2xl">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
+              fill="currentColor">
+              <path fill-rule="evenodd"
+                d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                clip-rule="evenodd" />
+            </svg>
+            <div class="password-container flex w-full relative">
+              <input name="password" class="pl-2 w-full outline-none border-none"
+                type="{{!showPassword ? 'password' : 'text' }}" placeholder="***********" formControlName="password">
+              <span (click)="mostrarpaswword()" class="toggle-password text-gray-600">
+                @if (!showPassword) {<svg x-show="!show" xmlns="http://www.w3.org/2000/svg" fill="none"
+                  viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
+                </svg>}
+                @else {<svg x-show="show" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                  stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>}
+              </span>
+            </div>
+          </div>
+          <span class="text-red-500 ml-auto">{{ getErrorMessage('password') }}</span>
+        </div>
+        <button type="submit"
+          class="{{!formulario.valid ? 'block w-full bg-indigo-300 mt-5 py-2 rounded-2xl hover:bg-indigo-300 text-white font-semibold mb-2' : 'block w-full bg-indigo-500 mt-5 py-2 rounded-2xl hover:bg-indigo-700 hover:-translate-y-1 transition-all duration-500 text-white font-semibold mb-2' }}"
+          [disabled]="!formulario.valid">
+          @if (!loading) {<div class="flex justify-center items-center space-x-1 text-sm text-white">
+            <div>Iniciar Sesion</div>
+          </div>}
+          @else {
+          <div class="flex justify-center items-center space-x-1 text-sm text-white">
+            <svg fill='none' class="w-6 h-6 animate-spin" viewBox="0 0 32 32" xmlns='http://www.w3.org/2000/svg'>
+              <path clip-rule='evenodd'
+                d='M15.165 8.53a.5.5 0 01-.404.58A7 7 0 1023 16a.5.5 0 011 0 8 8 0 11-9.416-7.874.5.5 0 01.58.404z'
+                fill='currentColor' fill-rule='evenodd' />
+            </svg>
+            <div>Iniciando Sesion</div>
+          </div>}
+        </button>
+        <span class="text-red-500 ml-auto">{{errorEnSolicitud}}</span>
+        <div class="flex justify-center mt-4">
+          <span
+            class="text-sm ml-2 hover:text-blue-500 cursor-pointer hover:-translate-y-1 duration-500 transition-all">¿Olvidaste
+            tu contraseña?</span>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
