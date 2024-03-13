@@ -3,14 +3,25 @@
 <div>
    <app-nav (addshowSidebarEvent)="getshow($event)" />
    <div class="flex overflow-hidden bg-white pt-16">
-      <app-aside [showSidebar]="showSidebar" />
+
+      <app-aside [showSidebar]="showSidebar" (addFavoriteEvent)="getItem($event)" />
       <div class="bg-gray-900 opacity-50 hidden fixed inset-0 z-10" id="sidebarBackdrop"></div>
       <div id="main-content" [style.width]="showSidebar ? 'calc(100% - 64px)' : '100%'"
          class="h-full w-full bg-gray-50 relative overflow-y-auto {{!showSidebar ? '' : 'lg:ml-64' }}">
          <!-- ACA EMPIEZO A PONER LO QUE HARE VER EN MIS COMPONENTES -->
          <!-- =================================================================-->
+         @if (Itemselector==="Dashboard") {
          <app-homedash />
-
+         }
+         @else if (Itemselector==="Perfiles") {
+         <app-perfiles />
+         }
+         @else if (Itemselector==="Users") {
+            <app-usuarios/>
+         }
+         @else {
+            <app-productos/>
+         }
          <!-- =================================================================-->
          <app-footer />
          <p class="text-center text-sm text-gray-500 my-10">
