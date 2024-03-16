@@ -20,6 +20,9 @@ export class AsideComponent {
       if (this.cookieService.get('anside') !== null) {
         this.selectedItem = this.cookieService.get('anside');
       }
+      if (this.cookieService.get('color') !== null) {
+        this.color = this.cookieService.get('color');
+      }
     }
     else {
       window.location.href = '/login';
@@ -27,6 +30,7 @@ export class AsideComponent {
   }
 
   @Input() showSidebar = false;
+  @Input() color: string = "bg-white";
   // Puedes inicializarlo como true o false según tus necesidades
   selectedItem: string | null = null;
 

@@ -1,4 +1,4 @@
-<nav class="bg-teal-400 border-b border-gray-200 fixed z-30 w-full transition-transform transform">
+<nav class="{{color}} border-b border-gray-200 fixed z-30 w-full transition-transform transform">
    <div class="px-3 py-3 lg:px-5 lg:pl-3">
       <div class="flex items-center justify-between">
          <div class="flex items-center justify-start">
@@ -41,13 +41,13 @@
                            absolute z-[1000] float-left min-w-max list-none overflow-hidden shadow-lg data-[twe-dropdown-show]:block dark:bg-surface-dark"
                         aria-labelledby="dropdownMenuButton2" data-twe-dropdown-menu-ref style="position: absolute;">
                         <!-- Second dropdown menu items -->
-                        <li
+                        <li (click)="opensettingscolor()"
                            class="text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-300 group">
                            <span class="flex items-center">
                               <span>Tema:</span>
                               <span class="block p-1 rounded-full transition ease-in duration-300">
                                  <span
-                                    class="w-10 h-10 rounded-full focus:outline-none focus:shadow-outline inline-flex p-2 shadow"
+                                    class="w-10 h-10 {{color}} rounded-full focus:outline-none focus:shadow-outline inline-flex p-2 shadow"
                                     :style="`background: ${colorSelected}; color: white`">
                                     <svg class="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg"
                                        viewBox="0 0 24 24">
@@ -60,38 +60,49 @@
                               </span>
                            </span>
                         </li>
+                        <hr class="my-2 border-gray-300">
+                        @if (!menucolor) {
                         <li>
                            <ul class="grid grid-cols-2 justify-center items-center p-4">
                               <li class="mr-4">
                                  <span
                                     class="block p-1 border-2 border-gray-500 rounded-full transition ease-in duration-300">
-                                    <a href="#blue" class="block w-6 h-6 bg-teal-400 rounded-full"></a>
+                                    <a (click)="showcolor('bg-teal-400')"
+                                       class="block w-6 h-6 bg-teal-400 rounded-full"></a>
                                  </span>
                               </li>
                               <li class="mr-4">
                                  <span
                                     class="block p-1 border-2 border-white hover:border-gray-500 rounded-full transition ease-in duration-300">
-                                    <a href="#yellow" class="block w-6 h-6 bg-yellow-400 rounded-full"></a>
+                                    <a (click)="showcolor('bg-yellow-400')"
+                                       class="block w-6 h-6 bg-yellow-400 rounded-full"></a>
                                  </span>
                               </li>
                               <li class="mr-4">
                                  <span
                                     class="block p-1 border-2 border-white hover:border-gray-500 rounded-full transition ease-in duration-300">
-                                    <a href="#red"
+                                    <a (click)="showcolor('bg-white')"
                                        class="block w-6 h-6 border border-slate-400 bg-white rounded-full"></a>
                                  </span>
                               </li>
                               <li class="mr-4">
                                  <span
                                     class="block p-1 border-2 border-white hover:border-gray-500 rounded-full transition ease-in duration-300">
-                                    <a href="#green" class="block w-6 h-6 bg-green-400 rounded-full"></a>
+                                    <a (click)="showcolor('bg-green-400')"
+                                       class="block w-6 h-6 bg-green-400 rounded-full"></a>
                                  </span>
                               </li>
                            </ul>
                         </li>
-
+                        <hr class="my-2 border-gray-300">
+                        }
                         <li (click)="cerrarsesion()"
                            class="text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-300 group">
+                           <svg xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 512 512" class="h-4 w-auto">
+                              <path
+                                 d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1L32 320c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM352 416l64 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0c53 0 96 43 96 96l0 256c0 53-43 96-96 96l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z" />
+                           </svg>
                            <span class="ml-3">Salir</span>
                         </li>
                      </ul>

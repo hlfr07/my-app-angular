@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, HostListener, Output } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { AuthServiceService } from '../../../auth/auth-service.service';
 
 @Component({
   selector: 'app-nav',
@@ -10,14 +11,24 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class NavComponent {
   showSidebar: boolean = false; // Puedes inicializarlo como true o false según tus necesidades
-  constructor(private elementRef: ElementRef, private cookieService: CookieService) {
+  constructor(private elementRef: ElementRef, private cookieService: CookieService, private authService: AuthServiceService) {
     this.checkScreenSize(); // Llamar al método para establecer el estado inicial de showSidebar
   }
   ngOnInit(): void {
     // Llamada a la función para consultar la API cuando el componente se inicializa
-    this.showSidebar = !this.showSidebar
-    this.addshowSidebarEvent.emit(this.showSidebar);
-    this.checkScreenSize();
+    if (this.authService.decodeToken() !== null) {
+      // Llamada a la función para consultar la API cuando el componente se inicializa
+      this.showSidebar = !this.showSidebar
+      this.addshowSidebarEvent.emit(this.showSidebar);
+      this.checkScreenSize();
+
+      if (this.cookieService.get('color') !== null) {
+        this.color = this.cookieService.get('color');
+      }
+    }
+    else {
+      window.location.href = '/login';
+    }
   }
   //se declara para enviar iformacion al padre, se tiene que indicar que tipo de variable le vamos a pasar
   @Output() addshowSidebarEvent = new EventEmitter<boolean>();
@@ -43,7 +54,10 @@ export class NavComponent {
   onClick(event: MouseEvent) {
     if (!this.elementRef.nativeElement.contains(event.target)) {
       // Llamar a la función showSettings() cuando se hace clic fuera del elemento
-      if (this.settings === false) { this.showSettings(); }
+      if (this.settings === false) {
+        this.showSettings();
+        this.opensettingscolor();
+      }
 
     }
   }
@@ -59,4 +73,23 @@ export class NavComponent {
     window.location.reload();
   }
 
+  color: string = "bg-white";
+
+  //se declara para enviar iformacion al padre, se tiene que indicar que tipo de variable le vamos a pasar
+  @Output() addshowColorEvent = new EventEmitter<string>();
+
+  //creamos un metodo para output
+  showcolor(color: string): void {
+    this.cookieService.set('color', color);
+    this.color = color;
+    alert("color: " + this.color);
+    this.showSidebar = !this.showSidebar
+    this.addshowColorEvent.emit(color);
+  }
+
+  menucolor: boolean = true;
+
+  opensettingscolor() {
+    this.menucolor = !this.menucolor;
+  }
 }

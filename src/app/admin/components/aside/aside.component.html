@@ -1,9 +1,9 @@
 <aside id="sidebar"
    class="fixed z-20 h-full top-0 left-0 pt-16 flex lg:flex flex-shrink-0 flex-col w-64 transition-all duration-1000"
    aria-label="Sidebar" [class.translate-x-0]="showSidebar" [class.-translate-x-full]="!showSidebar" >
-   <div class="relative flex-1 flex flex-col min-h-0 border-r border-gray-200 bg-teal-400 pt-0">
+   <div class="relative flex-1 flex flex-col min-h-0 border-r border-gray-200 {{color}} pt-0">
       <div class="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
-         <div class="flex-1 px-3 bg-teal-400 divide-y space-y-1">
+         <div class="flex-1 px-3 {{color}}-400 divide-y space-y-1">
             <ul class="space-y-2 pb-2">
                <li>
                   <form action="#" method="GET" class="lg:hidden">

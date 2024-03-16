@@ -1,9 +1,9 @@
 <!-- component -->
 <!-- This is an example component -->
-<app-nav (addshowSidebarEvent)="getshow($event)" />
+<app-nav (addshowSidebarEvent)="getshow($event)" (addshowColorEvent)="getcolor($event)"/>
 <div class="flex overflow-hidden bg-white pt-16">
 
-   <app-aside [showSidebar]="showSidebar" (addFavoriteEvent)="getItem($event)" />
+   <app-aside [showSidebar]="showSidebar" (addFavoriteEvent)="getItem($event)" [color]="color"/>
 
    <div class="bg-gray-900 opacity-50 hidden fixed inset-0 z-10" id="sidebarBackdrop"></div>
    <div id="main-content" class="h-full w-full bg-gray-50 relative overflow-y-auto {{!showSidebar ? '' : 'lg:ml-64' }}">

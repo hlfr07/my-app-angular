@@ -71,6 +71,7 @@ export class LoginComponent {
           console.log(respuesta.token);
           // Almacena el itemselector
           this.cookieService.set('anside', "Dashboard");
+          this.cookieService.set('color', "bg-white");
           // Guardar token en la cookie
           this.cookieService.set('token', respuesta.token);
 

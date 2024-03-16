@@ -45,4 +45,8 @@ export class AdminComponent {
     //alert("actual: " + this.Itemselector + " cambia a: " + Item);
     this.Itemselector = Item;
   }
+  color: string = "bg-white";
+  getcolor(Color: string) {
+    this.color = Color;
+  }
 }
