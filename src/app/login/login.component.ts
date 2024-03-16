@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 import {
   FormControl,
@@ -13,7 +14,7 @@ import { ApiService } from './api/api.service';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, HomeComponent],
+  imports: [ReactiveFormsModule, HomeComponent, NgClass],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -114,5 +115,15 @@ export class LoginComponent {
       console.log('Formulario inválido');
       // Puedes agregar manejo de errores o mensajes de validación aquí
     }
+  }
+
+  usuarioFocus: boolean = false;
+
+  onFocus() {
+    this.usuarioFocus = true;
+  }
+
+  onBlur() {
+    this.usuarioFocus = false;
   }
 }

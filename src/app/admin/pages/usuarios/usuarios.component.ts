@@ -51,4 +51,6 @@ export class UsuariosComponent {
   postForm(show: boolean) {
     this.modalpost = show;
   }
+
+  
 }
