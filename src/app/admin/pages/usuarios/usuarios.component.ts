@@ -47,7 +47,8 @@ export class UsuariosComponent {
     );
   }
   modalpost: boolean = false;
-  postForm() {
-    this.modalpost = !this.modalpost;
+
+  postForm(show: boolean) {
+    this.modalpost = show;
   }
 }

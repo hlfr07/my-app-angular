@@ -68,8 +68,8 @@ export class LoginComponent {
         .loginUser(formlogin)
         .then((respuesta: any) => {
           console.log(respuesta.token);
-          // Almacena el token en el localStorage
-
+          // Almacena el itemselector
+          this.cookieService.set('anside', "Dashboard");
           // Guardar token en la cookie
           this.cookieService.set('token', respuesta.token);
 

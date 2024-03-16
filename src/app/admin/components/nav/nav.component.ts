@@ -1,4 +1,5 @@
-import { Component, EventEmitter, HostListener, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Output } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-nav',
@@ -9,7 +10,7 @@ import { Component, EventEmitter, HostListener, Output } from '@angular/core';
 })
 export class NavComponent {
   showSidebar: boolean = false; // Puedes inicializarlo como true o false según tus necesidades
-  constructor() {
+  constructor(private elementRef: ElementRef, private cookieService: CookieService) {
     this.checkScreenSize(); // Llamar al método para establecer el estado inicial de showSidebar
   }
   ngOnInit(): void {
@@ -37,4 +38,25 @@ export class NavComponent {
       this.show()
     }
   }
+
+  @HostListener('document:click', ['$event'])
+  onClick(event: MouseEvent) {
+    if (!this.elementRef.nativeElement.contains(event.target)) {
+      // Llamar a la función showSettings() cuando se hace clic fuera del elemento
+      if (this.settings === false) { this.showSettings(); }
+
+    }
+  }
+
+  settings: boolean = true;
+
+  showSettings() {
+    this.settings = !this.settings;
+  }
+
+  cerrarsesion() {
+    this.cookieService.deleteAll();
+    window.location.reload();
+  }
+
 }

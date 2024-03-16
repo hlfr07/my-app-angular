@@ -13,6 +13,7 @@ import { AuthServiceService } from '../../../../auth/auth-service.service';
   templateUrl: './modalpostuser.component.html',
   styleUrl: './modalpostuser.component.css'
 })
+
 export class ModalpostuserComponent {
   imageUrl: string | ArrayBuffer | null = null;
   showPassword: boolean = false;
@@ -52,9 +53,10 @@ export class ModalpostuserComponent {
   @Output() addshowModalEvent = new EventEmitter<boolean>();
 
   //creamos un metodo para output
-  showmodalclose() {
-    this.addshowModalEvent.emit();
+  showmodalclose(show: boolean) {
+    this.addshowModalEvent.emit(show);
   }
+
   //-------------------------------------------------------------------------------------
   formulario: FormGroup;
 
