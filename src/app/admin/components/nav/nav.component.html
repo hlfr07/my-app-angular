@@ -3,7 +3,7 @@
       <div class="flex items-center justify-between">
          <div class="flex items-center justify-start">
             <button id="toggleSidebarMobile" (click)="show()" aria-expanded="true" aria-controls="sidebar"
-               class=" mr-2 text-gray-600 hover:text-gray-900 cursor-pointer p-2 hover:bg-gray-100 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 rounded">
+               class=" mr-2 text-gray-600 hover:text-gray-900 cursor-pointer p-2 hover:bg-gray-100 rounded">
                <svg id="toggleSidebarMobileHamburger" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd"
@@ -18,8 +18,8 @@
                </svg>
             </button>
             <a href="#" class="text-xl font-bold flex items-center lg:ml-2.5">
-               <img src="https://demo.themesberg.com/windster/images/logo.svg" class="h-6 mr-2" alt="Windster Logo">
-               <span class="self-center whitespace-nowrap">Windster</span>
+               <img src="../../../../favicon.ico" class="h-6 mr-2" alt="Windster Logo">
+               <span class="self-center whitespace-nowrap">Angular</span>
             </a>
          </div>
          <div class="flex items-center">
@@ -28,14 +28,14 @@
                   <div class="mr-5">
                      <div class="inline-block relative shrink-0 cursor-pointer rounded-[.95rem]">
                         <img class="w-[40px] h-[40px] shrink-0 inline-block rounded-[.95rem]"
-                           src="https://raw.githubusercontent.com/Loopple/loopple-public-assets/main/riva-dashboard-tailwind/img/avatars/avatar1.jpg"
+                           src={{avatar}}
                            alt="avatar image">
                      </div>
                   </div>
                   <div class="mr-2 ">
                      <span href="javascript:void(0)"
-                        class="dark:hover:text-primary hover:text-primary transition-colors duration-200 ease-in-out text-[1.075rem] font-medium dark:text-neutral-400/90 text-secondary-inverse">Markus</span>
-                     <span class="text-secondary-dark dark:text-stone-500 font-medium block text-[0.85rem]">ADMIN</span>
+                        class="dark:hover:text-primary hover:text-primary transition-colors duration-200 ease-in-out text-[1.075rem] font-medium dark:text-neutral-400/90 text-secondary-inverse">{{usuario}}</span>
+                     <span class="text-secondary-dark dark:text-stone-500 font-medium block text-[0.85rem]">{{rol}}</span>
                      @if (!settings) {
                      <ul class="m-0 list-item rounded-lg border border-gray-300 bg-white bg-clip-padding text-left text-base dark:bg-surface-dark flex-col
                            absolute z-[1000] float-left min-w-max list-none overflow-hidden shadow-lg data-[twe-dropdown-show]:block dark:bg-surface-dark"
@@ -66,28 +66,28 @@
                            <ul class="grid grid-cols-2 justify-center items-center p-4">
                               <li class="mr-4">
                                  <span
-                                    class="block p-1 border-2 border-gray-500 rounded-full transition ease-in duration-300">
+                                    class="block p-1 border-2 {{color==='bg-teal-400' ? 'border-gray-500' :'border-white'}} hover:border-gray-500 rounded-full transition ease-in duration-300">
                                     <a (click)="showcolor('bg-teal-400')"
                                        class="block w-6 h-6 bg-teal-400 rounded-full"></a>
                                  </span>
                               </li>
                               <li class="mr-4">
                                  <span
-                                    class="block p-1 border-2 border-white hover:border-gray-500 rounded-full transition ease-in duration-300">
+                                    class="block p-1 border-2 {{color==='bg-yellow-400' ? 'border-gray-500' :'border-white'}} hover:border-gray-500 rounded-full transition ease-in duration-300">
                                     <a (click)="showcolor('bg-yellow-400')"
                                        class="block w-6 h-6 bg-yellow-400 rounded-full"></a>
                                  </span>
                               </li>
                               <li class="mr-4">
                                  <span
-                                    class="block p-1 border-2 border-white hover:border-gray-500 rounded-full transition ease-in duration-300">
+                                    class="block p-1 border-2 {{color==='bg-white' ? 'border-gray-500' :'border-white'}} hover:border-gray-500 rounded-full transition ease-in duration-300">
                                     <a (click)="showcolor('bg-white')"
                                        class="block w-6 h-6 border border-slate-400 bg-white rounded-full"></a>
                                  </span>
                               </li>
                               <li class="mr-4">
                                  <span
-                                    class="block p-1 border-2 border-white hover:border-gray-500 rounded-full transition ease-in duration-300">
+                                    class="block p-1 border-2 {{color==='bg-green-400' ? 'border-gray-500' :'border-white'}} hover:border-gray-500 rounded-full transition ease-in duration-300">
                                     <a (click)="showcolor('bg-green-400')"
                                        class="block w-6 h-6 bg-green-400 rounded-full"></a>
                                  </span>
@@ -98,8 +98,7 @@
                         }
                         <li (click)="cerrarsesion()"
                            class="text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-300 group">
-                           <svg xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 512 512" class="h-4 w-auto">
+                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="h-4 w-auto">
                               <path
                                  d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1L32 320c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM352 416l64 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0c53 0 96 43 96 96l0 256c0 53-43 96-96 96l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z" />
                            </svg>

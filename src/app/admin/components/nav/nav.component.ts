@@ -1,4 +1,11 @@
-import { Component, ElementRef, EventEmitter, HostListener, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Output,
+} from '@angular/core';
+import * as jwt from 'jwt-decode';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthServiceService } from '../../../auth/auth-service.service';
 
@@ -7,26 +14,48 @@ import { AuthServiceService } from '../../../auth/auth-service.service';
   standalone: true,
   imports: [],
   templateUrl: './nav.component.html',
-  styleUrl: './nav.component.css'
+  styleUrl: './nav.component.css',
 })
 export class NavComponent {
   showSidebar: boolean = false; // Puedes inicializarlo como true o false según tus necesidades
-  constructor(private elementRef: ElementRef, private cookieService: CookieService, private authService: AuthServiceService) {
+  rol: string = '';
+  usuario: string = '';
+  avatar: string = '';
+  constructor(
+    private elementRef: ElementRef,
+    private cookieService: CookieService,
+    private authService: AuthServiceService
+  ) {
     this.checkScreenSize(); // Llamar al método para establecer el estado inicial de showSidebar
   }
+
+  getToken(): string | null {
+    return this.cookieService.get('token');
+  }
+
   ngOnInit(): void {
-    // Llamada a la función para consultar la API cuando el componente se inicializa
     if (this.authService.decodeToken() !== null) {
+      const token = this.getToken();
+      if (token === null) {
+        // Manejar el caso en que token es null, por ejemplo:
+        console.error('Token es null');
+        // Posiblemente lanzar un error o retornar.
+      } else {
+        const decodedToken = jwt.jwtDecode(token) as any;
+        this.rol = decodedToken.role;
+        this.usuario = decodedToken.username;
+        this.avatar = decodedToken.imagen;
+        // Continuar con la lógica usando decodedToken
+      }
       // Llamada a la función para consultar la API cuando el componente se inicializa
-      this.showSidebar = !this.showSidebar
+      this.showSidebar = !this.showSidebar;
       this.addshowSidebarEvent.emit(this.showSidebar);
       this.checkScreenSize();
 
       if (this.cookieService.get('color') !== null) {
         this.color = this.cookieService.get('color');
       }
-    }
-    else {
+    } else {
       window.location.href = '/login';
     }
   }
@@ -35,7 +64,7 @@ export class NavComponent {
 
   //creamos un metodo para output
   show() {
-    this.showSidebar = !this.showSidebar
+    this.showSidebar = !this.showSidebar;
     this.addshowSidebarEvent.emit(this.showSidebar);
   }
 
@@ -46,7 +75,7 @@ export class NavComponent {
 
   private checkScreenSize() {
     if (window.innerWidth >= 640) {
-      this.show()
+      this.show();
     }
   }
 
@@ -58,7 +87,6 @@ export class NavComponent {
         this.showSettings();
         this.opensettingscolor();
       }
-
     }
   }
 
@@ -73,7 +101,7 @@ export class NavComponent {
     window.location.reload();
   }
 
-  color: string = "bg-white";
+  color: string = 'bg-white';
 
   //se declara para enviar iformacion al padre, se tiene que indicar que tipo de variable le vamos a pasar
   @Output() addshowColorEvent = new EventEmitter<string>();
@@ -82,8 +110,7 @@ export class NavComponent {
   showcolor(color: string): void {
     this.cookieService.set('color', color);
     this.color = color;
-    alert("color: " + this.color);
-    this.showSidebar = !this.showSidebar
+    this.showSidebar = !this.showSidebar;
     this.addshowColorEvent.emit(color);
   }
 
