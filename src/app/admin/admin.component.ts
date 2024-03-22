@@ -9,11 +9,12 @@ import { HomedashComponent } from './pages/homedash/homedash.component';
 import { PerfilesComponent } from './pages/perfiles/perfiles.component';
 import { ProductosComponent } from './pages/productos/productos.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
+import { WordComponent } from './pages/word/word.component';
 
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [NgClass, HomedashComponent, NavComponent, AsideComponent, FooterComponent, PerfilesComponent, UsuariosComponent, ProductosComponent],
+  imports: [NgClass, HomedashComponent, NavComponent, AsideComponent, FooterComponent, PerfilesComponent, UsuariosComponent, ProductosComponent, WordComponent],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css',
 })
