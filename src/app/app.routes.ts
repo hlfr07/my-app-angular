@@ -5,10 +5,11 @@ import { protegerGuard } from './guards/proteger.guard';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
+import { valiloginGuard } from './guards/valilogin.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent, canActivate: [valiloginGuard]},
   { path: 'admin', component: AdminComponent, canActivate: [protegerGuard]},
   { path: 'usuario', component: UserComponent, canActivate: [protegerGuard]},
   { path: '**', component: ErrorPageComponent },
