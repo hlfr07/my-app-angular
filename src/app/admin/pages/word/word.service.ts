@@ -35,7 +35,8 @@ export class WordService {
       }
 
       // Generar el archivo
-      const generatedDoc = doc.getZip().generate({ type: 'blob' });
+      const generatedDoc = doc.getZip().generate({ type: 'blob', mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+
 
       // Descargar el archivo
       fs.saveAs(generatedDoc, 'documento.docx');

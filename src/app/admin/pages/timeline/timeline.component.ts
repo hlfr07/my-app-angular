@@ -1,5 +1,7 @@
 import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
+import jsPDF from 'jspdf';
+import * as mammoth from 'mammoth';
 
 @Component({
   selector: 'app-timeline',
@@ -35,4 +37,5 @@ export class TimelineComponent {
     console.log(this.seHizoClic);
   }
 
+  
 }

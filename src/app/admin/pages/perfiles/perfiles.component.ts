@@ -45,4 +45,9 @@ export class PerfilesComponent {
       }
     );
   }
+  //--------------PARA MI MODAL--------------------------------
+  modal: boolean = false;
+  showModal() {
+    this.modal = !this.modal;
+  }
 }
