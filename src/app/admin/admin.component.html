@@ -12,22 +12,34 @@
             <!-- ACA EMPIEZO A PONER LO QUE HARE VER EN MIS COMPONENTES -->
             <!-- =================================================================-->
             @if (Itemselector==="Dashboard") {
+            @defer () {
             <app-homedash />
             }
+            }
             @else if (Itemselector==="Perfiles") {
+            @defer () {
             <app-perfiles />
             }
+            }
             @else if (Itemselector==="Users") {
+            @defer () {
             <app-usuarios />
             }
+            }
             @else if (Itemselector==="Generar Word") {
+            @defer () {
             <app-word />
             }
+            }
             @else if (Itemselector==="TIMELINE") {
-               <app-timeline/>
-               }
+            @defer () {
+            <app-timeline />
+            }
+            }
             @else {
+            @defer () {
             <app-productos />
+            }
             }
             <!-- =================================================================-->
          </div>
