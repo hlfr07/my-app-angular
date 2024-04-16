@@ -11,31 +11,12 @@ import * as mammoth from 'mammoth';
   styleUrl: './timeline.component.css'
 })
 export class TimelineComponent {
-  mostrarSegundoDiv = false;
-  seHizoClic = false;
-  itemtimeline: string = "2";
+  modal = false;
+  
+  itemtimeline: string = "3";
 
-  onMouseEnter() {
-    this.mostrarSegundoDiv = true;
+  mostrarmodal() {
+    this.modal = !this.modal;
   }
-
-  onMouseLeave() {
-    if (!this.seHizoClic) {
-      this.mostrarSegundoDiv = false;
-    }
-  }
-
-  toggleMostrarSegundoDiv() {
-    if (this.seHizoClic == false) {
-      this.seHizoClic = true;
-      this.mostrarSegundoDiv = true;
-    }
-    else {
-      this.seHizoClic = false;
-      this.mostrarSegundoDiv = !this.mostrarSegundoDiv;
-    }
-    console.log(this.seHizoClic);
-  }
-
   
 }

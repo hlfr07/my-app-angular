@@ -1,5 +1,5 @@
 <!-- component -->
-<div class="w-screen h-screen relative isolate overflow-hidden bg-gray-900">
+<div class="w-screen h-screen relative isolate overflow-hidden bg-gray-900 overflow-y-auto">
   <div class="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8">
     <div>
       <img class="h-11" src="../../favicon.ico" alt="Your Company">
@@ -16,14 +16,17 @@
       </div>
       <h1 class="mt-10 text-4xl font-bold tracking-tight text-white sm:text-6xl">TU PUERTA AL MUNDO DEL CONOCIMIENTO
       </h1>
+
       <p class="mt-6 text-lg leading-8 text-gray-300">Este proyecto forma parte de mi autoaprendizaje en el mundo de la
         programación en Angular 17..</p>
       <div class="mt-10 flex items-center gap-x-6">
         <a href="/login"
-          class="rounded-md bg-orange-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400">Comenzar Ahora</a>
+          class="rounded-md bg-orange-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400">Comenzar
+          Ahora</a>
         <!--
         <a href="#" class="text-sm font-semibold leading-6 text-white">Learn more <span aria-hidden="true">→</span></a>
         -->
+
       </div>
     </div>
     <div class="mt-16">
@@ -31,6 +34,31 @@
         <img src="../../assets/admin.png" alt="App screenshot"
           class="w-full rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10">
       </div>
+
+    </div>
+
+  </div>
+  <div class="w-full mx-auto [perspective:1000px] bg-transparent">
+    <div
+      class="font-sans h-[250px] w-[250px] absolute top-[30%] left-[30%] [transform-style:preserve-3d] animate-[roll_5s_infinite]">
+      <div
+        class="h-[250px] w-[250px] text-center border-2 border-white py-[100px] px-0 text-white bg-black text-3xl box-border absolute [transition:all_1s] [transform:translateZ(125px)]">
+        Front</div>
+      <div
+        class="h-[250px] w-[250px] text-center border-2 border-white py-[100px] px-0 text-white bg-black text-3xl box-border absolute [transition:all_1s] [transform:translateZ(-125px)]">
+        Back</div>
+      <div
+        class="h-[250px] w-[250px] text-center border-2 border-white py-[100px] px-0 text-white bg-black text-3xl box-border absolute [transition:all_1s] right-[125px] [transform:rotateY(-90deg)]">
+        Left</div>
+      <div
+        class="h-[250px] w-[250px] text-center border-2 border-white py-[100px] px-0 text-white bg-black text-3xl box-border absolute [transition:all_1s] left-[125px] [transform:rotateY(90deg)]">
+        Right</div>
+      <div
+        class="h-[250px] w-[250px] text-center border-2 border-white py-[100px] px-0 text-white bg-black text-3xl box-border absolute [transition:all_1s] bottom-[125px] [transform:rotateX(90deg)]">
+        Top</div>
+      <div
+        class="h-[250px] w-[250px] text-center border-2 border-white py-[100px] px-0 text-white bg-black text-3xl box-border absolute [transition:all_1s] top-[125px] [transform:rotateX(-90deg)]">
+        Bottom</div>
     </div>
   </div>
 </div>

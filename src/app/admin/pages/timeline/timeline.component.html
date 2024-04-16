@@ -1,103 +1,265 @@
 <section class="bg-gray-50 py-12 sm:py-16 lg:py-20 xl:py-24">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <ul class="mx-auto mt-12 grid max-w-md grid-cols-1 gap-10 sm:mt-16 lg:mt-20 lg:max-w-5xl lg:grid-cols-4">
-            <li class="flex-start group relative flex lg:flex-col">
+        <ul class="mx-auto mt-12 grid max-w-md grid-cols-1 gap-10 sm:mt-16 lg:mt-20 lg:max-w-5xl lg:grid-cols-6">
+            <li class="flex-start group relative flex lg:flex-col {{itemtimeline>='1'? 'cursor-pointer': ''}}"
+                (click)=" itemtimeline >= '1' && mostrarmodal()">
                 <span
-                    class="absolute left-[18px] top-14 h-[calc(100%_-_32px)] w-px {{itemtimeline=='1' ? 'bg-gray-500' : 'bg-gray-300'}} lg:right-0 lg:left-auto lg:top-[18px] lg:h-px lg:w-[calc(100%_-_72px)]"
+                    class="absolute left-[18px] top-14 h-[calc(100%_-_32px)] w-px {{itemtimeline>='1'? 'bg-gray-700': 'bg-gray-300'}} lg:right-0 lg:left-auto lg:top-[18px] lg:h-px lg:w-[calc(100%_-_72px)]"
                     aria-hidden="true"></span>
-                <div (mouseenter)="itemtimeline == '1' && onMouseEnter()"
-                    (mouseleave)="itemtimeline == '1' && onMouseLeave()"
-                    (click)=" itemtimeline == '1' && toggleMostrarSegundoDiv()"
-                    class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border transition-all duration-200 {{itemtimeline=='1'? 'group-hover:border-gray-400 group-hover:bg-gray-400 border-gray-900 bg-gray-900': 'border-gray-700 bg-gray-700'}}">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg"
-                        class="h-5 w-5 {{itemtimeline=='1'? 'group-hover:text-gray-900 text-white': 'text-white'}}">
-                        <path
-                            d="M21 12C21 13.6569 16.9706 15 12 15C7.02944 15 3 13.6569 3 12M21 5C21 6.65685 16.9706 8 12 8C7.02944 8 3 6.65685 3 5M21 5C21 3.34315 16.9706 2 12 2C7.02944 2 3 3.34315 3 5M21 5V19C21 20.6569 16.9706 22 12 22C7.02944 22 3 20.6569 3 19V5"
-                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
+                <div
+                    class="
+                {{itemtimeline>='1'? 'inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-all duration-200': 'inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl '}}">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAFLElEQVR4nO2aW0xTdxzHf0xDNh/M2Bz6MDKzRAEjMGL1TAFZ2BZZwOmWyZtb5nS6B4XtMEx8kN3QhcypDOd0iwqmTJioYHQgrdAx5FLoKWELidy2sZAsru0oibOs7W/5l9PRQ08v9Fx6yvpNvmlCOJfP5/wvpwSAaKKJJpoQsnd4ctX+Iau2aNh6nx6dQs8eGJlCymgWVsZko4wm/YpLPaWgRPh3R6zWueDu7rprFS6ALZTX4mMXdTdASdk/ZNX6gifd8pNFVAGkcVWtzaCUFPEMe3dfG/xLNHhPAYqSQLOwWosNbU4naiw23DdkFfXJ8wlwTYeqNo1iBNid6Mo/TsSMfnHBfQlQhASaFeAZKeB9CQi7BFoBAsIqgZZRwKLPL/uV8HiV7taCFhB3odWvAJeE6raWBSsgreN3XHz8SmAJcm6RtIwCSNO7Jsh8x0XH6v1KWF7X/WHYtkFKQgHB16SXVYDGYsMHDie2WGwKgJ/5AiWrANqjYYdnGxUgR+gIGAGOnaqv7S/mTjsKMn7Bt1cvk1RA4YiyBIwd3tthz9qOjsxtrtq3P2fBfanxkgl4S8Q/gAhtV83hm99e78SusjPoKcHx6mYL0k/HSyIgV4Kvwb76OtOJzcwBNBk2IRqS8U8mA5sMhbjT2IVnm6qRwLvrJeGVbDOWPvWwqAIKBic5N5iouYuxJ68FfHMLpSX1NNoNa13gczvYtIcD70uCfXf6QcECCkdmhj3fk4+tkAb+g8vv8IK7qlmO+isHeQWQdn9yekbC5q2IO6h1ggVQfoaoFAICwaMaENUxfiXoP65Ex+70jwTDBxLgmgIiSvAHP97yDAvvbgz21tNe8LWN7ThQXvwdiBVKpgXvDHPMJ3yn5uU58PwSCHxP/ftHRYMnkQN+F/MjOg1rfMBv8wHPlSAJvFwCPmPOhgjPtuYhNN/OIsd8CpEo4E1jh9cICB4+BlH3pOex4kqgAi2CIr0H7FGX4FjHRhzt2IR16hwuYF3szGdgePElUDJvg0Wn3pgFvPkooj5xBop83ogLBl5cCZSMAjjwV5fwgzU/EQw8t31J42hIfknR7wEceFLtCp9ApjvpwcP/16TfRBcgVo9ry7zntx8BpJO9qnlLACUKKG0/z7+6+5oCnKGd/HfEC7j38yFELcUvoXlZMBIcEStgo9GEzl+PIk6cQGz32Po8am+OD2G+yyQgUeB7QH5VJeLEydl2beXAT9fEYkn7RaxkKpQpIFbgDvBN2Rc4fKmaK0Ff4Nrm3PDua524XbrwBDS+dx7PPavDsfoLHAkPundg8Q9qzrXSGvTBSJiWfwpUhC7hqyNf4jlKh7V5t3C0tQx1TDkeMVzDzP4/vK5FBAQnIel+xCyC1DzqFkB6uu2QPwE27EuyR9SLEDVPAaTFLafIK64B+5JsPCIG5sJj35rciBWwvnvCSwBpSEDzjRRAqjvjmN40gGnXe3nBgi3IkQ2M2Som/Lq2IUHQs+2xyiKAMpquivnkxYHXY2qjoUEWAar+e4kbGJNZDAGuYS8GfEOPJe17ZqUsAkhUA6YEymiuo4zmSUErucA5n9bQM0WevKzw0UQTTTTRRMPJYgBYCgDkf3ASAGA1AKQAwHoAyASALADIBoAcAHgBALYAAPkiks82l/3Z8+zvZLPHZLLnSGHPmcBeYyl7zbBlCQCQfVfF3nB+mJrD3sNK9p5kSSoA5IUR2lfz2JEieVL+7wKUOgUeAYUtgmvZBSxjziJIFrpgF0FyLDkHOdcqKRbBfwGGccpGVAlV+AAAAABJRU5ErkJggg=="
+                        class="{{itemtimeline>='1'? 'h-10 w-10': 'h-10 w-10 filter opacity-50'}} {{itemtimeline=='1'? 'animate-bounce': ''}}">
                 </div>
                 <div class="ml-6 lg:ml-0 lg:mt-3">
                     <h3
-                        class="text-xl font-bold text-gray-900 before:mb-2 before:block before:font-mono before:text-sm before:text-gray-500">
-                        Add your databases
+                        class="
+                        {{itemtimeline>='1'? 'text-xl font-bold text-gray-900 before:mb-2 before:block before:font-mono before:text-sm before:text-gray-500': 'text-xl font-bold text-gray-400 before:mb-2 before:block before:font-mono before:text-sm before:text-gray-500'}}">
+                        REGISTRO DEL CASO
                     </h3>
-                    @if (mostrarSegundoDiv && itemtimeline==="1") {
-                    <h4 class="mt-2 text-base text-gray-700">Use your own Notion databases or duplicate ours.</h4>
-                    }
                 </div>
             </li>
-            <li class="flex-start group relative flex lg:flex-col">
+            <li class="flex-start group relative flex lg:flex-col {{itemtimeline>='2'? 'cursor-pointer': ''}}"
+                (click)=" itemtimeline >= '2' && mostrarmodal()">
                 <span
-                    class="absolute left-[18px] top-14 h-[calc(100%_-_32px)] w-px bg-gray-300 lg:right-0 lg:left-auto lg:top-[18px] lg:h-px lg:w-[calc(100%_-_72px)]"
+                    class="absolute left-[18px] top-14 h-[calc(100%_-_32px)] w-px {{itemtimeline>='2'? 'bg-gray-700': 'bg-gray-300'}} lg:right-0 lg:left-auto lg:top-[18px] lg:h-px lg:w-[calc(100%_-_72px)]"
                     aria-hidden="true"></span>
-                <div (mouseenter)="itemtimeline == '2' && onMouseEnter()"
-                    (mouseleave)="itemtimeline == '2' && onMouseLeave()"
-                    (click)=" itemtimeline == '2' && toggleMostrarSegundoDiv()"
-                    class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-gray-300 bg-gray-50 transition-all duration-200 group-hover:border-gray-900 group-hover:bg-gray-900">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg"
-                        class="h-5 w-5 text-gray-600 group-hover:text-white">
-                        <path
-                            d="M2 3L2 21M22 3V21M11.8 20H12.2C13.8802 20 14.7202 20 15.362 19.673C15.9265 19.3854 16.3854 18.9265 16.673 18.362C17 17.7202 17 16.8802 17 15.2V8.8C17 7.11984 17 6.27976 16.673 5.63803C16.3854 5.07354 15.9265 4.6146 15.362 4.32698C14.7202 4 13.8802 4 12.2 4H11.8C10.1198 4 9.27976 4 8.63803 4.32698C8.07354 4.6146 7.6146 5.07354 7.32698 5.63803C7 6.27976 7 7.11984 7 8.8V15.2C7 16.8802 7 17.7202 7.32698 18.362C7.6146 18.9265 8.07354 19.3854 8.63803 19.673C9.27976 20 10.1198 20 11.8 20Z"
-                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
+                <div
+                    class="
+                    {{itemtimeline>='2'? 'inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-all duration-200': 'inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl '}}">
+                    <img src="data:image/png;base64,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"
+                        class="{{itemtimeline>='2'? 'h-10 w-10': 'h-10 w-10 filter opacity-50'}} {{itemtimeline=='2'? 'animate-bounce': ''}}">
                 </div>
                 <div class="ml-6 lg:ml-0 lg:mt-3">
                     <h3
-                        class="text-xl font-bold text-gray-900 before:mb-2 before:block before:font-mono before:text-sm before:text-gray-500">
-                        Map your fields
+                        class="
+                            {{itemtimeline>='2'? 'text-xl font-bold text-gray-900 before:mb-2 before:block before:font-mono before:text-sm before:text-gray-500': 'text-xl font-bold text-gray-400 before:mb-2 before:block before:font-mono before:text-sm before:text-gray-500'}}">
+                        DIAGNOSTICO
                     </h3>
-                    @if (mostrarSegundoDiv && itemtimeline==="2") {
-                    <h4 class="mt-2 text-base text-gray-700">Map your Notion fields with Feather fields.</h4>
-                    }
+
                 </div>
             </li>
-            <li class="flex-start group relative flex lg:flex-col">
+            <li class="flex-start group relative flex lg:flex-col {{itemtimeline>='3'? 'cursor-pointer': ''}}"
+                (click)=" itemtimeline >= '3' && mostrarmodal()">
                 <span
-                    class="absolute left-[18px] top-14 h-[calc(100%_-_32px)] w-px bg-gray-300 lg:right-0 lg:left-auto lg:top-[18px] lg:h-px lg:w-[calc(100%_-_72px)]"
+                    class="absolute left-[18px] top-14 h-[calc(100%_-_32px)] w-px {{itemtimeline>='3'? 'bg-gray-700': 'bg-gray-300'}} lg:right-0 lg:left-auto lg:top-[18px] lg:h-px lg:w-[calc(100%_-_72px)]"
                     aria-hidden="true"></span>
-                <div (mouseenter)="itemtimeline == '3' && onMouseEnter()"
-                    (mouseleave)="itemtimeline == '3' && onMouseLeave()"
-                    (click)=" itemtimeline == '3' && toggleMostrarSegundoDiv()"
-                    class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-gray-300 bg-gray-50 transition-all duration-200 group-hover:border-gray-900 group-hover:bg-gray-900">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg"
-                        class="h-5 w-5 text-gray-600 group-hover:text-white">
-                        <path
-                            d="M22 12C22 17.5228 17.5228 22 12 22M22 12C22 6.47715 17.5228 2 12 2M22 12C22 9.79086 17.5228 8 12 8C6.47715 8 2 9.79086 2 12M22 12C22 14.2091 17.5228 16 12 16C6.47715 16 2 14.2091 2 12M12 22C6.47715 22 2 17.5228 2 12M12 22C14.2091 22 16 17.5228 16 12C16 6.47715 14.2091 2 12 2M12 22C9.79086 22 8 17.5228 8 12C8 6.47715 9.79086 2 12 2M2 12C2 6.47715 6.47715 2 12 2"
-                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
+                <div
+                    class="
+                {{itemtimeline>='3'? 'inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-all duration-200': 'inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl '}}">
+                    <img src="data:image/png;base64,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"
+                        class="{{itemtimeline>='3'? 'h-10 w-10': 'h-10 w-10 filter opacity-50'}} {{itemtimeline=='3'? 'animate-bounce': ''}}">
                 </div>
                 <div class="ml-6 lg:ml-0 lg:mt-3">
                     <h3
-                        class="text-xl font-bold text-gray-900 before:mb-2 before:block before:font-mono before:text-sm before:text-gray-500">
-                        Choose your domain
+                        class="
+                            {{itemtimeline>='3'? 'text-xl font-bold text-gray-900 before:mb-2 before:block before:font-mono before:text-sm before:text-gray-500': 'text-xl font-bold text-gray-400 before:mb-2 before:block before:font-mono before:text-sm before:text-gray-500'}}">
+                        EJECUCIÓN DEL SERVICIO
                     </h3>
-                    @if (mostrarSegundoDiv && itemtimeline==="3") {
-                    <h4 class="mt-2 text-base text-gray-700">Choose a domain or a subdomain for your blog.</h4>
-                    }
+
                 </div>
             </li>
-            <li class="flex-start group relative flex lg:flex-col">
-                <div (mouseenter)="itemtimeline == '4' && onMouseEnter()"
-                    (mouseleave)="itemtimeline == '4' && onMouseLeave()"
-                    (click)=" itemtimeline == '4' && toggleMostrarSegundoDiv()"
-                    class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-gray-300 bg-gray-50 transition-all duration-200 group-hover:border-gray-900 group-hover:bg-gray-900">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg"
-                        class="h-5 w-5 text-gray-600 group-hover:text-white">
-                        <path
-                            d="M5.50049 10.5L2.00049 7.9999L3.07849 6.92193C3.964 6.03644 4.40676 5.5937 4.9307 5.31387C5.39454 5.06614 5.90267 4.91229 6.42603 4.86114C7.01719 4.80336 7.63117 4.92617 8.85913 5.17177L10.5 5.49997M18.4999 13.5L18.8284 15.1408C19.0742 16.3689 19.1971 16.983 19.1394 17.5743C19.0883 18.0977 18.9344 18.6059 18.6867 19.0699C18.4068 19.5939 17.964 20.0367 17.0783 20.9224L16.0007 22L13.5007 18.5M7 16.9998L8.99985 15M17.0024 8.99951C17.0024 10.1041 16.107 10.9995 15.0024 10.9995C13.8979 10.9995 13.0024 10.1041 13.0024 8.99951C13.0024 7.89494 13.8979 6.99951 15.0024 6.99951C16.107 6.99951 17.0024 7.89494 17.0024 8.99951ZM17.1991 2H16.6503C15.6718 2 15.1826 2 14.7223 2.11053C14.3141 2.20853 13.9239 2.37016 13.566 2.5895C13.1623 2.83689 12.8164 3.18282 12.1246 3.87469L6.99969 9C5.90927 10.0905 5.36406 10.6358 5.07261 11.2239C4.5181 12.343 4.51812 13.6569 5.07268 14.776C5.36415 15.3642 5.90938 15.9094 6.99984 16.9998V16.9998C8.09038 18.0904 8.63565 18.6357 9.22386 18.9271C10.343 19.4817 11.6569 19.4817 12.7761 18.9271C13.3643 18.6356 13.9095 18.0903 15 16.9997L20.1248 11.8745C20.8165 11.1827 21.1624 10.8368 21.4098 10.4331C21.6291 10.0753 21.7907 9.6851 21.8886 9.27697C21.9991 8.81664 21.9991 8.32749 21.9991 7.34918V6.8C21.9991 5.11984 21.9991 4.27976 21.6722 3.63803C21.3845 3.07354 20.9256 2.6146 20.3611 2.32698C19.7194 2 18.8793 2 17.1991 2Z"
-                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
+            <li class="flex-start group relative flex lg:flex-col {{itemtimeline>='4'? 'cursor-pointer': ''}}"
+                (click)=" itemtimeline >= '4' && mostrarmodal()">
+                <span
+                    class="absolute left-[18px] top-14 h-[calc(100%_-_32px)] w-px {{itemtimeline>='4'? 'bg-gray-700': 'bg-gray-300'}} lg:right-0 lg:left-auto lg:top-[18px] lg:h-px lg:w-[calc(100%_-_72px)]"
+                    aria-hidden="true"></span>
+                <div
+                    class="
+                {{itemtimeline>='4'? 'inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-all duration-200': 'inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl '}}">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAACXBIWXMAAAsTAAALEwEAmpwYAAAJPUlEQVR4nOVbaXBT1xX2TNq0//qvM/2bH53WnUmnI+tePa2WZFvyIuMF2SCDkQzYLMaGxImxjVcSA6YmLMaEErYUEhazB2qDbbAJiw3EMdBmoGWGzrhNWiYpk2aaptvpnPt0L09C8iI9ya77Zu4MenrvnvP5nPOd5YqExMTEFymlmyilf6SUQjwXIeSflNIeSZK+nxCvixCyMd5AQ6z7cQNNCPkDCu27fhvGnn4d1zUtoKlfYLzBKgFnZOfFDzSdAYD3nB2EjOxcHtefaDSaH8QdcLGvRPVY9ZYsCQn4UO9H8QNNwwBG5dQG7Fu8NECGMz2D3W/be1wGfWYg9u5Np9GlN7RvneiP1D2rAD9+8iUDzS0dKk/PKsBjkyC0WUVaYzMJsDcOpDWjAI/9v7n0WIxI6sLlD6F9RyesrFwDcwsKwWa3g06nA0mSwJ6SAu7C+VDxSpUArNFovv0/B3hg+GOobWyBZKttymFACPkzIWQ7IeSnM4q0vCEIafD2XShbuSrguez8AqisbYbNew7DvrOX4cTVu3B2+CFb+O99Z/rZd/hMdp5b+e5/KKWnKaUvzwjS8ikI6dGf/gJNrZuYm+J3JrMFVte2wMHzg3D+zqMprQMfDDLwRpOZW/xf2L9bLJbvqgp4LMI1dO8BzC2Yx/ZEwKhs19VRAeDYlY/gzY59UFpZBTnueWC1p4DeYAC3pzgA6PGBj9nin7sGR2FVdQOLd156JiUlvTStgC9+OMSIB/fDRmDv6T6hcOeRD2DhkuXC6sHLmO6BvI3D4N1+G6oOjII11cmexXd2HT0v9nnnVC+ku+aI+NZqtdK0AO69dgsslmS218KlK+DU9d8wBQ/13ICiktJn4HQSGDKKwOpthdTV70Fa9TlwNgxAesvNgGUueJU9y9/DPY9evsP2PHntPiwoKeOg/5qUlKSNKWl5gwhq+P5Dll7wu6UVVXDu1m+ZYhvffheMZjn2dAYzJHvqwLmu7zlw4Zaj5ldg8dSCZLSyPdD9kdBwbyS5xeVruE5PtFrtD2NGWj4FQf3usy8g310grMDBVq/fLJ43zSkF57reSQN9DnhtDxizvGK/+rYdAjS3NKV0xOl0fifmLt28oU3ELHdjAVYngdW3EdKbb0QMVqzmG2Ar2Qw6v5uv27RNuHd6VjYH/VZMAV+9c48RCy5OUOjGzIV1EtiX7YweaNCyLd0qQLfvPcJk7jl5ibE3piytVvuTmAEuXb6SvYuphxMUj1mrb5PqYAXokjYR00f6bzPZmLL8JHZBNdLyKsgKrcuLCp4vORtjzMYKLHdvHtPIGzxP8+JEkqSfqUJaPgVZ1TW2sHtYQfE8y1xZbwJHbXdsAbfcBGfdRZCMchrk4VRR08St3KmqSz9+8qVIQ7xcxAIBPycvaFQHUMMAGBwFYHAWhn0GUxbKXFL+CtNh/7kr3DhPw3ZZNALA2OLxRoCXi6yC0ulUs645v4LJMKTmh30mreYCywQoG10adXHl5nPQRtUAb+nYFUBWWBuz8jBrkTqkVLpNVloyQFrViXGf5bHMGZuTF6W0KSrSUhIWNu94j1c9pZWvyazp3RA12LTXTjEewP3spdsnfD65WOaS8tfrmS5tuw/xOD4RFWkpCStvrtynYj+LQrDrwc8pFQejjlu9XW4MTLkrJvVO6urD7PncAg/TZe+Zfq7zPdVc2mqTCYvHDeZD/IzMqUbc6m2ukA1F2DhG2Zku0Vb6Lfy5aoB5i3d26AETgv0sEzpJJaON2wCvqJctarHa5Pp66AG38FeqAeYAnwNcfzkucRuwmuSMgToEAf5GNdIK59KOuktxiVvlcvhd2paSGuzSn6lGWjhexXuY6ANIq/KX4yqHjT8WE8pWUcStfU5EIYFEie/nFfpJ63QfBzyqmkuvrAhMS8vWrJWrrEVvjA/YIffNhpRcBhrdl5ej6NbRNBKYGlla+oXM2pTSk6oB3tLxdkDh8fN33pcLD1fJ+O67rpeBZQW+zRV53Cr/iOketkfrzv3BhUe1aoB7Bm/IpWWeWzThkl7Pyjwcy4wPug/0KTkiVCKJWxG/td2sN0bZx66MBJSWhBBTVKSlJK7ff/6VaB5wboyCFpWV+5uHhomJCi3tcMvxHEUqsxTVM5nFpSuCm4dP3W73C1GRVjBxNaxvDXBrFKaTJNAZLBNaWY2FMjAkcNLB20PUxa9rR0iwkbo0HwCgMJPZLNITt7Ipe3HMAeOQAWXh5JKnI9SFUvpvSumPE9QGPKZoIrDxRqHv9Q5Dsj9H48AtVmCti94Q1dXhizeZ7PJq2b0JIV1hwUYL+NrIfdDr9fIQ70w/E7z1YBezPJKJrWyH6mDtyzpZ343hs+3dk+I0wj/E+2Zc606VtEJVXW+2tbN7mYoxbU3rFvlZBF3SptqYFi3LJ5Z1G7Y+G9P6j17C9sCRklYo8sJxzzxPEbuPYx4+iG9q3yUOvjA/T+XE4TmCqu0BU448cEfAje2dTAbKWrB4mVK3woSJLqrC2dKdTx5BmsPB9lmy6lUBGisxjDOmqMEMlvk1TPlJA627xOZWOr2R7WG2JEP7vqMCLM6yWFn67ETxH4SQnJgDHnv6NVwZGgGrzSYsfer6r8W8y7e88pkVJAMYM4shuXg9pK45wop/R30/pDdfB8fa86wex5k2q6D8QNBT8A/JZ9DsMM1vWbNegiaPC7yZ9smBpioelw7cGoXUtDS2X0Z2TsBx6e6ubnYmrDfI1prMwjkzWnH38e6Qx6WSTgeN87PgLV8uW5MCTVU+EB95+Bg8CxbKCkkSVKxtFHmaDcyvjrK6t2z166zD4QfiuGwpaVC40MdSTOvOA8ySygNyvK84EJcJNNMuAE8KNPH/QPzStWHVQCORbd7WIQYDWBBgFbT/3MCUf/KAFVzQTx7+TghpRIJCUFMGTeL8XwCwuEerI6Ghy6PFcUqBCz0B72GLh89k5Yhf1vIK6pgkST9S6J4TFnRGGNCJiYkvImhu6Rm4PqWU7ghXUEQEOl6XxWL5liRJekppHZaAeIiNp/eEkC8IIX9DcDipwJky9rPY4oXteiIArdVq7Qmz5RoXdKZ9/Fn1bAPd7HFxwE8TZtulBF2cYYeWIhfYjXoO+GDCbLyUoKl/EUKGNBrN96Zbt5hdSFCEkLvoxpTSAxzsfwGVd5wNUAPtYAAAAABJRU5ErkJggg=="
+                        class="{{itemtimeline>='4'? 'h-10 w-10': 'h-10 w-10 filter opacity-50'}} {{itemtimeline=='4'? 'animate-bounce': ''}}">
                 </div>
                 <div class="ml-6 lg:ml-0 lg:mt-3">
                     <h3
-                        class="text-xl font-bold text-gray-900 before:mb-2 before:block before:font-mono before:text-sm before:text-gray-500">
-                        Get your blog
+                        class="
+                            {{itemtimeline>='4'? 'text-xl font-bold text-gray-900 before:mb-2 before:block before:font-mono before:text-sm before:text-gray-500': 'text-xl font-bold text-gray-400 before:mb-2 before:block before:font-mono before:text-sm before:text-gray-500'}}">
+                        PRUEBA DE CALIDAD
                     </h3>
-                    @if (mostrarSegundoDiv && itemtimeline==="4") {
-                    <h4 class="mt-2 text-base text-gray-700">That's it. You will get back a professional blog.</h4>
-                    }
+
+                </div>
+            </li>
+            <li class="flex-start group relative flex lg:flex-col {{itemtimeline>='5'? 'cursor-pointer': ''}}"
+                (click)=" itemtimeline >= '5' && mostrarmodal()">
+                <span
+                    class="absolute left-[18px] top-14 h-[calc(100%_-_32px)] w-px {{itemtimeline>='5'? 'bg-gray-700': 'bg-gray-300'}} lg:right-0 lg:left-auto lg:top-[18px] lg:h-px lg:w-[calc(100%_-_72px)]"
+                    aria-hidden="true"></span>
+                <div
+                    class="
+                {{itemtimeline>='5'? 'inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-all duration-200': 'inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl '}}">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAEu0lEQVR4nO2aX2hbZRiHvwthvfFioLCV6WZXN62uSre0KS0G3da1SZMma7fOdku6rq09XetWNtifC4fghbBlAUHBC9kuBEXZQIdVcLBJ1U3pzXrRiykIikkVmXjTC9l85I05ZTQ96znJyZcD5oGHnrznfc/761dIIFSpChUqVKhQwTbrE1RVj5OqniBTPQGldu04f64d5+LjBquVF1g3TuqxcSiDs2smeLTcv7/aYJDZMAZPGPi07BsD0/UGs7XlPoRaA0Td+2pHuZX7Wd5D2PwKiLr3bTFYvWmEmezrEebqxlijysEzIyCWY58cQt0IM/K6rlyHUD8EolW9WFfaJ4dQP8RMrj5Xl9B8CA2HQLSqF6udfXIIDYPMZO8NMufTeQi+gyCWe19rH6u3HWRG7m0b0HgIzQMgalmmlPIPkJZ9/jiNS+9tHeGR5gFuZTMlmJVDKXmg1jiIVnUn2tnXEidp93ktcS6oUhM4AKJV3Ym29iWoCuwnGThA2sYz76hSs70fROUxtOVq6wNReQxtuYL7QFQeQ1uucC+IShPyHtDZSyrcS6ZzL+nwXs5LrWy5YntAVJqI7iFl7rzPZNly9fSAaLc/kaCqu5tUdzeZnh7SPT2cl5rd+dwcsRi+7m6acvvTxeYqmH27QbTb37ublDmzaCz/L/iA+T9k5uUojXtj+OW6d3f+ATjNVTD9MRDt9vdFyeRmfPsjNMl1XzT/F7DYta4/xs/mzkWjnC02V8EkukC02x/vYl7641EaE2H82esu5lecC1OfiPBLtj/CT4ku7iQipOMRzk20s6rYXAUzGAHRTu+hLsKDYRbMmUWl1knUci7MzsEIf+X6pwYjPOxmrqIY7gRxpb6REMZwiLvSOxTi+nCIeTF7/V/t3nAnx5fODYUZGOrk71zP22cCPORmrqIxQiAurScCVBlBUqMhMqNBfpWe0SD3RkMcy3tGkONyL9dz3QjxmxEiPRrkYyPEP0aQu2NBJt3I5TrjQRDz6h2kzHumh4N8aPmcDqKHO1jIm+lgYSxIl1u5XOdoO4hL60d2kZH6q+34jgRpyvbt4vcVnjWfN9O+8hukk1yuc2wXiHn1NtJSn2yjcbIdf7av7cEfd4XMOM3lOid2gphX30HSvHefeZ/Xxc44zeU6p3eAuLR+JkDVqR0kT20nLZ7evvzndbEzTnO5zmsvgag8hrZcr78IovIY2nK9EQBReQxtud58AUSrui7t5nKds60gWtV1aTeX66RaQFQeQ1uut5pBdPOZE1OsOvo9NXaVfh25luUdP4hWdSeasyen+fHk12DXE9P8YDeX67zbCKJV3Ynm7Lnr4FS7uVznPR+Ibj7zwpfgVB25luXiVhCVi1z5HJyqI9eyvN8AolXdiebsjU/BqXZzuc4Hz4NoVXeiOXv7Et/dvgy2vcRVu7lc56PnQFQeQ1uuy1tAVB5DW65PngVReQxtuT6rA/FKXf7/7JSLqafwm7lKvuyLp8HLlvwArm6GrJtIL16X2/uylPwArm0CUXkMbbmmN5KeroWvnvTOe8B0LX7JJNlKvuybGpLfbgRPWlPYV+qOuLaeqps1JG/UkL5ZA14wl+XcVG1hX6lXqFChQgX1P+Vfk41uzqVHeYYAAAAASUVORK5CYII="
+                        class="{{itemtimeline>='5'? 'h-10 w-10': 'h-10 w-10 filter opacity-50'}} {{itemtimeline=='5'? 'animate-bounce': ''}}">
+                </div>
+                <div class="ml-6 lg:ml-0 lg:mt-3">
+                    <h3
+                        class="
+                            {{itemtimeline>='5'? 'text-xl font-bold text-gray-900 before:mb-2 before:block before:font-mono before:text-sm before:text-gray-500': 'text-xl font-bold text-gray-400 before:mb-2 before:block before:font-mono before:text-sm before:text-gray-500'}}">
+                        INFORME DE ALTA DE SERVICIO
+                    </h3>
+
+                </div>
+            </li>
+            <li class="flex-start group relative flex lg:flex-col {{itemtimeline>='6'? 'cursor-pointer': ''}}"
+                (click)=" itemtimeline >= '6' && mostrarmodal()">
+                <div
+                    class="
+                {{itemtimeline>='6'? 'inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-all duration-200': 'inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl '}}">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAESElEQVR4nO1bXUwUVxQ+lPpUZR/7JDEaJWmCgHPXjQKFlB+x+tCkxDfTRB9aYhFl9cHEhCZ90tTGNm1JOrMvbaP2JzHbxqhhKcxAlB+rSyjFiBAFxRi7rAxJ07V2T3O2A8zssrDAeu+4O1/yJZudn73fd8859+zkDoAD/vh6W2e5ImkXZKY+lJkakSX1gSyp531SVxlkMloqOl6VmdaqMA2TUZbUL+k8yETIS4g3mwCZBsWtvpmK+HkTtFLIJCiSdsEikKn3FLdW9c3Wq6/5WFe1wtT7VhPUc5BJkJn60CLQrVVZjkudNXFp8AAyCQpTn5kFfvFGx1rL8Z3d6+Ii4Bm8zFAkdQ/NYrIcp7BfLAIslLQJH+vaDS8TFEmbWLTIMfUeiaZIUCS1NrEGJBTFcbAT3r87vblxRG8/clf/yzs2g2YeHp1Judovh57gVAK335rSPcHQRTbwpICr+KOjuh4vfJYH7ujcDJg3IjTFBkPruRjQOKK3JxNP3PV7mLsBBn/gYsCRBcJ+lvXDT2OD+azmelrFn629nooB01wM8Bpi28MRjESjGAhH8IMRPTbzs4Op/3Y8bSaQ+He/G0/FAORqwPMoxvBPFLF0YOnB8SBXA8wQLdwxIOhEAGZFCjSdGMLW0m78sGU4+1Kg4ePbcytDa1m3vQwo7pnEPF8Acz75EeH098siXeNS2rCkZ9Ii5lDLcGy2G0/+gfu/GkPZPb80Nh8fstcymOcLLFt4PF2+NosYEj/3Z8jdNff5o/du4o7fQuINCIQj+Pe/UWwLRzD3059WbQDdwyzmWPNgQlN06p0+LO/50x7LoNdECuF0R0BpfygmeFb859XXsOrXx/bpA7wmUg0gASuuAb5AQg0g1l5+hGfe7sUze3pw96XE47YxwGODLlCYAU2jWW7AwTt6dhtQZ/obnFWdoHdsBvcNT3MTb5tOsGn0/7A3z7zITpBdm8CSK4NY9MsNPgZ4FnBeVCcodY5gkb9/jsIMyBXQCdLMm8ULNcAloBOMhb1dDCgW0AlSztvGAI8Axot3DPA7EYAZnwJNpk4w61KgIa4TtJUBxQI6QVsZkCegE7SVAbkCOkFbGeAS0AnayoBiEZ2gnQzwOJ3gFHcTnAjwOymAWVsD3L2TmZUCzPRcbyFhqZKLAdtjuzPTJz7+ud7K2adzMcATDF1M58ynR3w/bv35pp+LAWzgSQFtTU2HAQs911uReH9fuOjyrQ1cDCDQvlzamkq7M1e1lq8y54v8fTM081zFO3CQgDUA4AKA1wEgHwC2AEAhALgBgF6GLAeASgB4CwDoTZFdAFAHAHsN1hnfVRvnVBrXlBn3KDTumW/8hsv4TWFYBwCbaEU0Br1XEKuNMdBYLO8gvSi8QvVPoOClyIwxZrUBOcABawFgo5GfIlOgyhjDRl4pAEmwWBGkV2CpoFUYBY4GnawI0jE6h86la+jaF1oE/wNrCtzJ9z1QdAAAAABJRU5ErkJggg=="
+                        class="{{itemtimeline>='6'? 'h-10 w-10': 'h-10 w-10 filter opacity-50'}} {{itemtimeline=='6'? 'animate-bounce': ''}}">
+                </div>
+                <div class="ml-6 lg:ml-0 lg:mt-3">
+                    <h3
+                        class="
+                        {{itemtimeline>='6'? 'text-xl font-bold text-gray-900 before:mb-2 before:block before:font-mono before:text-sm before:text-gray-500': 'text-xl font-bold text-gray-400 before:mb-2 before:block before:font-mono before:text-sm before:text-gray-500'}}">
+                        CONFORMIDAD DE SERVICIO
+                    </h3>
                 </div>
             </li>
         </ul>
     </div>
 </section>
+
+@if (modal && itemtimeline>="1") {
+<div class="
+overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex
+" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+
+    <div class="relative bg-white rounded-lg overflow-hidden shadow-xl max-w-screen-md w-full m-4"
+        x-transition:enter="transition ease-out duration-300 transform opacity-0 scale-95"
+        x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+        x-transition:leave="transition ease-in duration-200 transform opacity-100 scale-100"
+        x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" x-cloak>
+        <!-- Modal panel -->
+        <div class="px-6 py-4 flex justify-between items center border-b border-gray-200">
+            <div class="flex items-center justify-center">
+                <p class="text-xl font-bold text-gray-800">NOMBRE DEL ESTADO EN EL QUE SE ESTA</p>
+            </div>
+            <div (click)="mostrarmodal()"
+                class="bg-red-500 hover:bg-red-600 cursor-pointer hover:text-white font-sans text-white w-8 h-8 flex items-center justify-center rounded-full">
+                x
+            </div>
+        </div>
+        <div class="prose max-w-screen-md overflow-y-auto"
+            style="max-height: 70vh; background-color: #fff; border: 1px solid #e2e8f0; border-radius: 0.375rem; box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);">
+            <div>
+                <div class="lg:h-full py-8 px-6 text-gray-600 rounded-xl border border-gray-200 bg-white">
+                    <svg class="w-40 m-auto" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M27.9985 2.84071C31.2849 2.84071 34.539 3.488 37.5752 4.74562C40.6113 6.00324 43.3701 7.84657 45.6938 10.1703C48.0176 12.4941 49.861 15.2529 51.1186 18.289C52.3762 21.3252 53.0235 24.5793 53.0235 27.8657C53.0235 31.152 52.3762 34.4061 51.1186 37.4423C49.861 40.4785 48.0176 43.2372 45.6938 45.561C43.3701 47.8848 40.6113 49.7281 37.5752 50.9857C34.539 52.2433 31.2849 52.8906 27.9985 52.8906C24.7122 52.8906 21.4581 52.2433 18.4219 50.9857C15.3857 49.7281 12.627 47.8848 10.3032 45.561C7.97943 43.2372 6.1361 40.4785 4.87848 37.4423C3.62086 34.4061 2.97357 31.152 2.97357 27.8657C2.97357 24.5793 3.62086 21.3252 4.87848 18.289C6.13611 15.2529 7.97943 12.4941 10.3032 10.1703C12.627 7.84656 15.3857 6.00324 18.4219 4.74562C21.4581 3.488 24.7122 2.84071 27.9985 2.84071L27.9985 2.84071Z"
+                            stroke="#e4e4f2" stroke-width="3" />
+                        <path
+                            d="M27.301 2.50958C33.0386 2.35225 38.6614 4.13522 43.26 7.57004C47.8585 11.0049 51.1637 15.8907 52.641 21.437C54.1182 26.9834 53.6811 32.8659 51.4002 38.133C49.1194 43.4001 45.1283 47.7437 40.0726 50.4611C35.0169 53.1785 29.1923 54.1108 23.541 53.1071C17.8897 52.1034 12.7423 49.2225 8.93145 44.9305C5.12062 40.6384 2.86926 35.1861 2.54159 29.4558C2.21391 23.7254 3.82909 18.0521 7.12582 13.3536"
+                            stroke="url(#paint0_linear_622:13696)" stroke-width="5" stroke-linecap="round" />
+                        <path
+                            d="M13.3279 30.7467C13.3912 29.48 13.8346 28.5047 14.6579 27.8207C15.4939 27.124 16.5896 26.7757 17.9449 26.7757C18.8696 26.7757 19.6612 26.9404 20.3199 27.2697C20.9786 27.5864 21.4726 28.0234 21.8019 28.5807C22.1439 29.1254 22.3149 29.746 22.3149 30.4427C22.3149 31.2407 22.1059 31.9184 21.6879 32.4757C21.2826 33.0204 20.7949 33.3877 20.2249 33.5777V33.6537C20.9596 33.8817 21.5296 34.287 21.9349 34.8697C22.3529 35.4524 22.5619 36.1997 22.5619 37.1117C22.5619 37.8717 22.3846 38.5494 22.0299 39.1447C21.6879 39.74 21.1749 40.2087 20.4909 40.5507C19.8196 40.88 19.0089 41.0447 18.0589 41.0447C16.6276 41.0447 15.4622 40.6837 14.5629 39.9617C13.6636 39.2397 13.1886 38.1757 13.1379 36.7697H15.7219C15.7472 37.3904 15.9562 37.8907 16.3489 38.2707C16.7542 38.638 17.3052 38.8217 18.0019 38.8217C18.6479 38.8217 19.1419 38.6444 19.4839 38.2897C19.8386 37.9224 20.0159 37.4537 20.0159 36.8837C20.0159 36.1237 19.7752 35.579 19.2939 35.2497C18.8126 34.9204 18.0652 34.7557 17.0519 34.7557H16.5009V32.5707H17.0519C18.8506 32.5707 19.7499 31.969 19.7499 30.7657C19.7499 30.221 19.5852 29.7967 19.2559 29.4927C18.9392 29.1887 18.4769 29.0367 17.8689 29.0367C17.2736 29.0367 16.8112 29.2014 16.4819 29.5307C16.1652 29.8474 15.9816 30.2527 15.9309 30.7467H13.3279ZM25.6499 37.9477C26.8659 36.9344 27.8349 36.092 28.5569 35.4207C29.2789 34.7367 29.8806 34.0274 30.3619 33.2927C30.8433 32.558 31.0839 31.836 31.0839 31.1267C31.0839 30.4807 30.9319 29.974 30.6279 29.6067C30.3239 29.2394 29.8553 29.0557 29.2219 29.0557C28.5886 29.0557 28.1009 29.271 27.7589 29.7017C27.4169 30.1197 27.2396 30.696 27.2269 31.4307H24.6429C24.6936 29.9107 25.1433 28.758 25.9919 27.9727C26.8533 27.1874 27.9426 26.7947 29.2599 26.7947C30.7039 26.7947 31.8123 27.181 32.5849 27.9537C33.3576 28.7137 33.7439 29.7207 33.7439 30.9747C33.7439 31.9627 33.4779 32.9064 32.9459 33.8057C32.4139 34.705 31.8059 35.4904 31.1219 36.1617C30.4379 36.8204 29.5449 37.6184 28.4429 38.5557H34.0479V40.7597H24.6619V38.7837L25.6499 37.9477Z"
+                            fill="currentColor" />
+                        <path
+                            d="M36.1948 28.8842C36.1948 29.4438 36.2557 29.8634 36.3775 30.1432C36.4992 30.423 36.6967 30.5628 36.9699 30.5628C37.5097 30.5628 37.7796 30.0033 37.7796 28.8842C37.7796 27.7717 37.5097 27.2155 36.9699 27.2155C36.6967 27.2155 36.4992 27.3537 36.3775 27.6302C36.2557 27.9067 36.1948 28.3247 36.1948 28.8842ZM38.456 28.8842C38.456 29.6347 38.3293 30.2024 38.0758 30.5875C37.8257 30.9693 37.457 31.1602 36.9699 31.1602C36.5091 31.1602 36.1504 30.9644 35.8936 30.5727C35.6402 30.181 35.5135 29.6182 35.5135 28.8842C35.5135 28.1371 35.6352 27.5742 35.8788 27.1957C36.1257 26.8172 36.4894 26.6279 36.9699 26.6279C37.4472 26.6279 37.8142 26.8238 38.0709 27.2155C38.3276 27.6071 38.456 28.1634 38.456 28.8842ZM40.5395 31.7774C40.5395 32.3402 40.6003 32.7615 40.7221 33.0413C40.8439 33.3178 41.043 33.456 41.3195 33.456C41.596 33.456 41.8001 33.3194 41.9317 33.0462C42.0634 32.7697 42.1292 32.3468 42.1292 31.7774C42.1292 31.2145 42.0634 30.7982 41.9317 30.5283C41.8001 30.2551 41.596 30.1185 41.3195 30.1185C41.043 30.1185 40.8439 30.2551 40.7221 30.5283C40.6003 30.7982 40.5395 31.2145 40.5395 31.7774ZM42.8056 31.7774C42.8056 32.5245 42.6789 33.0906 42.4254 33.4757C42.1753 33.8575 41.8067 34.0484 41.3195 34.0484C40.8521 34.0484 40.4917 33.8526 40.2383 33.4609C39.9881 33.0693 39.8631 32.5081 39.8631 31.7774C39.8631 31.0302 39.9849 30.4674 40.2284 30.0889C40.4753 29.7104 40.839 29.5211 41.3195 29.5211C41.7869 29.5211 42.1506 29.7153 42.4106 30.1037C42.6739 30.4888 42.8056 31.0467 42.8056 31.7774ZM41.5318 26.7316L37.5278 33.9497H36.8021L40.8061 26.7316H41.5318Z"
+                            fill="white" />
+                        <path
+                            d="M23.5776 18.4198H25.5424V22.8407H23.5776V18.4198ZM30.4545 16.455H32.4193V22.8407H30.4545V16.455ZM27.0161 13.5078H28.9809V22.8407H27.0161V13.5078Z"
+                            fill="#6A6A9F" />
+                        <defs>
+                            <linearGradient id="paint0_linear_622:13696" x1="5.54791e-07" y1="42.0001" x2="54.6039"
+                                y2="41.9535" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#E323FF" />
+                                <stop offset="1" stop-color="#7517F8" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <div class="mt-6">
+                        <h5 class="text-xl text-gray-700 text-center">Ask to customize</h5>
+                        <div class="mt-2 flex justify-center gap-4">
+                            <h3 class="text-3xl font-bold text-gray-700">28</h3>
+                            <div class="flex items-end gap-1 text-green-500">
+                                <svg class="w-3" viewBox="0 0 12 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6.00001 0L12 8H-3.05176e-05L6.00001 0Z" fill="currentColor" />
+                                </svg>
+                                <span>2%</span>
+                            </div>
+                        </div>
+                        <span class="block text-center text-gray-500">Compared to last week 13</span>
+                    </div>
+                    <table class="mt-6 -mb-2 w-full text-gray-600">
+                        <tbody>
+                            <tr>
+                                <td class="py-2">Tailored ui</td>
+                                <td class="text-gray-500">896</td>
+                                <td>
+                                    <svg class="w-16 ml-auto" viewBox="0 0 68 21" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <rect opacity="0.4" width="17" height="21" rx="1" fill="#e4e4f2" />
+                                        <rect opacity="0.4" x="19" width="14" height="21" rx="1" fill="#e4e4f2" />
+                                        <rect opacity="0.4" x="35" width="14" height="21" rx="1" fill="#e4e4f2" />
+                                        <rect opacity="0.4" x="51" width="17" height="21" rx="1" fill="#e4e4f2" />
+                                        <path
+                                            d="M0 7C8.62687 7 7.61194 16 17.7612 16C27.9104 16 25.3731 9 34 9C42.6269 9 44.5157 5 51.2537 5C57.7936 5 59.3731 14.5 68 14.5"
+                                            stroke="url(#paint0_linear_622:13631)" stroke-width="2"
+                                            stroke-linejoin="round" />
+                                        <defs>
+                                            <linearGradient id="paint0_linear_622:13631" x1="68" y1="7.74997"
+                                                x2="1.69701" y2="8.10029" gradientUnits="userSpaceOnUse">
+                                                <stop stop-color="#E323FF" />
+                                                <stop offset="1" stop-color="#7517F8" />
+                                            </linearGradient>
+                                        </defs>
+                                    </svg>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-2">Customize</td>
+                                <td class="text-gray-500">1200</td>
+                                <td>
+                                    <svg class="w-16 ml-auto" viewBox="0 0 68 21" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <rect opacity="0.4" width="17" height="21" rx="1" fill="#e4e4f2" />
+                                        <rect opacity="0.4" x="19" width="14" height="21" rx="1" fill="#e4e4f2" />
+                                        <rect opacity="0.4" x="35" width="14" height="21" rx="1" fill="#e4e4f2" />
+                                        <rect opacity="0.4" x="51" width="17" height="21" rx="1" fill="#e4e4f2" />
+                                        <path
+                                            d="M0 12.929C8.69077 12.929 7.66833 9.47584 17.8928 9.47584C28.1172 9.47584 25.5611 15.9524 34.2519 15.9524C42.9426 15.9524 44.8455 10.929 51.6334 10.929C58.2217 10.929 59.3092 5 68 5"
+                                            stroke="url(#paint0_linear_622:13640)" stroke-width="2"
+                                            stroke-linejoin="round" />
+                                        <defs>
+                                            <linearGradient id="paint0_linear_622:13640" x1="34" y1="5" x2="34"
+                                                y2="15.9524" gradientUnits="userSpaceOnUse">
+                                                <stop stop-color="#8AFF6C" />
+                                                <stop offset="1" stop-color="#02C751" />
+                                            </linearGradient>
+                                        </defs>
+                                    </svg>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-2">Other</td>
+                                <td class="text-gray-500">12</td>
+                                <td>
+                                    <svg class="w-16 ml-auto" viewBox="0 0 68 21" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <rect opacity="0.4" width="17" height="21" rx="1" fill="#e4e4f2" />
+                                        <rect opacity="0.4" x="19" width="14" height="21" rx="1" fill="#e4e4f2" />
+                                        <rect opacity="0.4" x="35" width="14" height="21" rx="1" fill="#e4e4f2" />
+                                        <rect opacity="0.4" x="51" width="17" height="21" rx="1" fill="#e4e4f2" />
+                                        <path
+                                            d="M0 6C8.62687 6 6.85075 12.75 17 12.75C27.1493 12.75 25.3731 9 34 9C42.6269 9 42.262 13.875 49 13.875C55.5398 13.875 58.3731 6 67 6"
+                                            stroke="url(#paint0_linear_622:13649)" stroke-width="2"
+                                            stroke-linejoin="round" />
+                                        <defs>
+                                            <linearGradient id="paint0_linear_622:13649" x1="67" y1="7.96873"
+                                                x2="1.67368" y2="8.44377" gradientUnits="userSpaceOnUse">
+                                                <stop stop-color="#FFD422" />
+                                                <stop offset="1" stop-color="#FF7D05" />
+                                            </linearGradient>
+                                        </defs>
+                                    </svg>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>}
